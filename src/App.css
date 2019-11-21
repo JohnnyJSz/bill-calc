@@ -1,6 +1,11 @@
 body {
-  background-image: url('bgpicture.jpg');
   font-family: 'Lora', serif;
+  background-image: url('bgpictureBig.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color:rosybrown;
+  min-height: 100vh;
+  margin: auto 0;
 }
 .App {
   margin: 0px;
@@ -17,6 +22,7 @@ button {
   font-size: 18px;
   border-radius: 10px;
   color: whitesmoke;
+  font-weight: bold;
 }
 
 input {
@@ -42,3 +48,9 @@ h1, h2, h3, h4, h5, h6 {
   border: solid 1px whitesmoke;
 }
 
+
+@media (max-width: 500px) {
+  .displayResults {
+    width: 60%;
+  }
+}

@@ -9,34 +9,37 @@ export default function App() {
   const prevReading = 11000;
 
   function resultValuesFn(gasValue, elecValue){
-    setResultGas(gasValue - prevReading);
-    setResultElec(elecValue - prevReading);
+    if (gasValue > prevReading && elecValue > prevReading)  {
+      setResultGas(gasValue - prevReading);
+      setResultElec(elecValue - prevReading);
+    } else {
+      alert('Please enter current meter readings.');
+    }
   }
 
   function billFormula(units) {
     return units > 100 ? 
       parseFloat((((100 * 10) + (units - 100) * 20)/100)).toFixed(2) : 
       parseFloat((units * 10)/100).toFixed(2);
-
   }
 
   return (
     <div className="App" >
       <div className='container'>
         <h1>Bill Calculator</h1>
-        <h3>Gas:</h3>
+        <h3>Gas</h3>
         <form>
           <input 
             type='number' 
-            placeholder='enter current reading' 
+            placeholder='Enter current reading' 
             value={gasValue}
             min='11000'
             onInput={element => setGasValue(element.target.value)}
           />
-          <h3>Electricity:</h3>
+          <h3>Electricity</h3>
           <input 
             type='number' 
-            placeholder='enter current reading' 
+            placeholder='Enter current reading' 
             value={elecValue}
             min='11000'
             onInput={element => setElecValue(element.target.value)}
@@ -45,12 +48,15 @@ export default function App() {
         <br />
         <br />
         <br />
-        <button onClick={() => resultValuesFn(gasValue, elecValue)}>CALCULATE</button>
+        <button 
+          onClick={() => resultValuesFn(gasValue, elecValue)}
+          >CALCULATE
+        </button>
         <br />
         <br />
         <div className='displayResults'>
-          <h3>Gas bill amount: £ {resultGas > 0 ? billFormula(resultGas) : '0'}</h3>
-          <h3>Electricity bill amount: £ {resultElec > 0 ? billFormula(resultElec) : '0'}</h3>
+          <h3>Gas bill:  <b>£{resultGas > 0 ? billFormula(resultGas) : '0'}</b></h3>
+          <h3>Electricity bill:  <b>£{resultElec > 0 ? billFormula(resultElec) : '0'}</b></h3>
         </div>
       </div>
     </div>
