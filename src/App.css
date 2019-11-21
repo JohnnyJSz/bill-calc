@@ -1,22 +1,44 @@
+body {
+  background-image: url('bgpicture.jpg');
+  font-family: 'Lora', serif;
+}
 .App {
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+  color: whitesmoke;
+}
+
+button {
+  padding: 10px;
+  height: auto;
+  width: 200px;
+  background-color: rosybrown;
+  font-size: 18px;
+  border-radius: 10px;
+  color: whitesmoke;
+}
+
+input {
+  width: 150px;
+  height: 30px;
+  font-size: 14px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  opacity: 1;
+  }
+
+.displayResults {
+  background-color: rosybrown;
+  width: 30%;
+  margin: 0 auto;
+  border-radius: 10px;
+  padding: 10px;
+  border: solid 1px whitesmoke;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #09d3ac;
-}

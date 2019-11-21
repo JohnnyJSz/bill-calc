@@ -1,26 +1,58 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
-function App() {
+export default function App() {
+  let [gasValue, setGasValue] = useState();
+  let [elecValue, setElecValue] = useState();
+  let [resultGas, setResultGas] = useState();
+  let [resultElec, setResultElec] = useState();
+  const prevReading = 11000;
+
+  function resultValuesFn(gasValue, elecValue){
+    setResultGas(gasValue - prevReading);
+    setResultElec(elecValue - prevReading);
+  }
+
+  function billFormula(units) {
+    return units > 100 ? 
+      parseFloat((((100 * 10) + (units - 100) * 20)/100)).toFixed(2) : 
+      parseFloat((units * 10)/100).toFixed(2);
+
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" >
+      <div className='container'>
+        <h1>Bill Calculator</h1>
+        <h3>Gas:</h3>
+        <form>
+          <input 
+            type='number' 
+            placeholder='enter current reading' 
+            value={gasValue}
+            min='11000'
+            onInput={element => setGasValue(element.target.value)}
+          />
+          <h3>Electricity:</h3>
+          <input 
+            type='number' 
+            placeholder='enter current reading' 
+            value={elecValue}
+            min='11000'
+            onInput={element => setElecValue(element.target.value)}
+          />
+        </form>
+        <br />
+        <br />
+        <br />
+        <button onClick={() => resultValuesFn(gasValue, elecValue)}>CALCULATE</button>
+        <br />
+        <br />
+        <div className='displayResults'>
+          <h3>Gas bill amount: £ {resultGas > 0 ? billFormula(resultGas) : '0'}</h3>
+          <h3>Electricity bill amount: £ {resultElec > 0 ? billFormula(resultElec) : '0'}</h3>
+        </div>
+      </div>
     </div>
   );
 }
-
-export default App;
